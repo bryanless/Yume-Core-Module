@@ -8,6 +8,11 @@
 import Foundation
 
 extension String {
+  public func localized(bundle: Bundle?) -> String {
+    let bundle = bundle ?? .main
+    return bundle.localizedString(forKey: self, value: nil, table: nil)
+  }
+
   public func apiToShortDate() -> String {
     let dateFormatterApi = DateFormatter()
     let dateFormatterResult = DateFormatter()
