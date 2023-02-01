@@ -8,59 +8,22 @@
 import Foundation
 
 extension String {
+  // MARK: - Localization
   public func localized(bundle: Bundle?) -> String {
     let bundle = bundle ?? .main
     return bundle.localizedString(forKey: self, value: nil, table: nil)
   }
 
-  public func apiToShortDate() -> String {
-    let dateFormatterApi = DateFormatter()
-    let dateFormatterResult = DateFormatter()
+  // MARK: - Date
+  public func apiStringDateToDate() -> Date? {
+    let dateFormatter = DateFormatter()
 
-    dateFormatterApi.dateFormat = "yyyy-MM-dd"
-    dateFormatterResult.dateFormat = "MMM dd, yyyy"
+    dateFormatter.dateFormat = "yyyy-MM-dd"
 
-    guard let date = dateFormatterApi.date(from: self) else {
-      return self.apiToFullYearMonthDate()
-    }
-
-    let result = dateFormatterResult.string(from: date)
-
-    return result
+    return dateFormatter.date(from: self)
   }
 
-  public func apiToFullDate() -> String {
-    let dateFormatterApi = DateFormatter()
-    let dateFormatterResult = DateFormatter()
-
-    dateFormatterApi.dateFormat = "yyyy-MM-dd"
-    dateFormatterResult.dateFormat = "MMMM dd, yyyy"
-
-    guard let date = dateFormatterApi.date(from: self) else {
-      return self.apiToFullYearMonthDate()
-    }
-
-    let result = dateFormatterResult.string(from: date)
-
-    return result
-  }
-
-  public func apiToFullYearMonthDate() -> String {
-    let dateFormatterApi = DateFormatter()
-    let dateFormatterResult = DateFormatter()
-
-    dateFormatterApi.dateFormat = "yyyy-MM"
-    dateFormatterResult.dateFormat = "MMMM yyyy"
-
-    guard let date = dateFormatterApi.date(from: self) else {
-      return self
-    }
-
-    let result = dateFormatterResult.string(from: date)
-
-    return result
-  }
-
+  // MARK: - Other
   public func snakeCaseToTitleCase() -> String {
     return self.replacingOccurrences(of: "_", with: " ").capitalized
   }
