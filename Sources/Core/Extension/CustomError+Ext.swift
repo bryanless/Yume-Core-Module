@@ -12,12 +12,14 @@ public enum URLError: LocalizedError {
   case invalidRequest
   case invalidResponse
   case addressUnreachable(URL)
+  case notConnectedToInternet
 
   public var errorDescription: String? {
     switch self {
     case .invalidRequest: return "Request is null."
     case .invalidResponse: return "The server responded with garbage."
     case .addressUnreachable(let url): return "\(url.absoluteString) is unreachable."
+    case .notConnectedToInternet: return "No internet connection"
     }
   }
 
