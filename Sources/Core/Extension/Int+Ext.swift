@@ -6,20 +6,9 @@
 //
 
 extension Int {
-  public func secondsToHoursMinutes() -> String {
-    let (hour, min, _) = (self / 3600, (self % 3600) / 60, (self % 60))
-
-    var text = ""
-
-    if hour > 0 {
-      text += "\(hour) hours "
-    }
-
-    if min > 0 {
-      text += "\(min) minutes "
-    }
-
-    return text
+  // Seconds to hours minutes seconds: https://stackoverflow.com/a/26794841/18764882
+  public func secondsToHoursMinutesSeconds() -> (Int, Int, Int) {
+    return (self / 3600, (self % 3600) / 60, (self % 60))
   }
 
   // Formatting numbers https://stackoverflow.com/a/48371527
