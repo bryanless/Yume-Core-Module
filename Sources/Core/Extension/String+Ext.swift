@@ -25,6 +25,57 @@ extension String {
     return yearMonthDateDateFormatter.date(from: self) ?? yearMonthDateFormatter.date(from: self)
   }
 
+  public func apiToShortDate(locale: Locale = .current) -> String {
+    guard let date = self.apiStringDateToDate() else {
+      return self
+    }
+
+    let dateFormatterResult = DateFormatter()
+    let template = "dd MMM yyyy"
+    
+    guard let localizedFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale) else {
+      return self.apiToFullYearMonthDate(locale: locale)
+    }
+
+    dateFormatterResult.dateFormat = localizedFormat
+
+    return dateFormatterResult.string(from: date)
+  }
+
+  public func apiToFullDate(locale: Locale = .current) -> String {
+    guard let date = self.apiStringDateToDate() else {
+      return self
+    }
+
+    let dateFormatterResult = DateFormatter()
+    let template = "dd MMMM yyyy"
+
+    guard let localizedFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale) else {
+      return self.apiToFullYearMonthDate(locale: locale)
+    }
+
+    dateFormatterResult.dateFormat = localizedFormat
+
+    return dateFormatterResult.string(from: date)
+  }
+
+  public func apiToFullYearMonthDate(locale: Locale = .current) -> String {
+    guard let date = self.apiStringDateToDate() else {
+      return self
+    }
+
+    let dateFormatterResult = DateFormatter()
+    let template = "MMMM yyyy"
+
+    guard let localizedFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale) else {
+      return self
+    }
+
+    dateFormatterResult.dateFormat = localizedFormat
+
+    return dateFormatterResult.string(from: date)
+  }
+
   // MARK: - Other
   public func snakeCaseToTitleCase() -> String {
     return self.replacingOccurrences(of: "_", with: " ").capitalized

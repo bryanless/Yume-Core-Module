@@ -2,9 +2,26 @@ import XCTest
 @testable import Core
 
 final class CoreTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
+
+  func testFormatStringDateToDate() {
+    XCTAssertEqual(try formatDate(stringDate: "2023-01", dateFormatComponents: [.monthFull, .yearFull]), "January 2023")
+    XCTAssertEqual(try formatDate(stringDate: "2023-04", dateFormatComponents: [.monthFull, .yearFull]), "April 2023")
+  }
+
+  func testFormatFullStringDateToFullDate() {
+    XCTAssertEqual("2023-01-01".apiToFullDate(), "01 January 2023")
+    XCTAssertEqual("2023-04-21".apiToFullDate(), "21 April 2023")
+  }
+
+  func formatDate(stringDate: String, dateFormatComponents: [Date.DateFormatComponents]) throws -> String {
+    guard let date = stringDate.apiStringDateToDate()?.format(with: dateFormatComponents) else {
+      throw FormatDateError.invalidInput
     }
+
+    return date
+  }
+}
+
+enum FormatDateError: Error {
+  case invalidInput
 }
