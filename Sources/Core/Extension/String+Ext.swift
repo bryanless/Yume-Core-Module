@@ -31,7 +31,7 @@ extension String {
     }
 
     let dateFormatterResult = DateFormatter()
-    let template = "dd MMM yyyy"
+    let template = "d MMM yyyy"
     
     guard let localizedFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale) else {
       return self.apiToFullYearMonthDate(locale: locale)
@@ -48,7 +48,7 @@ extension String {
     }
 
     let dateFormatterResult = DateFormatter()
-    let template = "dd MMMM yyyy"
+    let template = "d MMMM yyyy"
 
     guard let localizedFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale) else {
       return self.apiToFullYearMonthDate(locale: locale)
