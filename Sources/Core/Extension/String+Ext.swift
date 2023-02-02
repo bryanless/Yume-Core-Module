@@ -25,16 +25,35 @@ extension String {
     return yearMonthDateDateFormatter.date(from: self) ?? yearMonthDateFormatter.date(from: self)
   }
 
-  public func apiToShortDate(locale: Locale = .current) -> String {
-    guard let date = self.apiStringDateToDate() else {
-      return self
+  /// 2000-01-21
+  public func apiFullStringDateToDate() -> Date? {
+    let dateFormatter = DateFormatter()
+
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+
+    return dateFormatter.date(from: self)
+  }
+
+  /// 2000-01
+  public func apiShortStringDateToDate() -> Date? {
+    let dateFormatter = DateFormatter()
+
+    dateFormatter.dateFormat = "yyyy-MM"
+
+    return dateFormatter.date(from: self)
+  }
+
+  /// 2000-01-01 to 1 Jan 2000
+  public func apiFullStringDateToFullShortStringDate(locale: Locale = .current) -> String {
+    guard let date = self.apiFullStringDateToDate() else {
+      return self.apiShortStringDateToYearMonthStringDate(locale: locale)
     }
 
     let dateFormatterResult = DateFormatter()
     let template = "d MMM yyyy"
     
     guard let localizedFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale) else {
-      return self.apiToFullYearMonthDate(locale: locale)
+      return self
     }
 
     dateFormatterResult.dateFormat = localizedFormat
@@ -42,16 +61,17 @@ extension String {
     return dateFormatterResult.string(from: date)
   }
 
-  public func apiToFullDate(locale: Locale = .current) -> String {
-    guard let date = self.apiStringDateToDate() else {
-      return self
+  /// 2000-01-01 to 1 January 2000
+  public func apiFullStringDateToFullStringDate(locale: Locale = .current) -> String {
+    guard let date = self.apiFullStringDateToDate() else {
+      return self.apiShortStringDateToYearMonthStringDate(locale: locale)
     }
 
     let dateFormatterResult = DateFormatter()
     let template = "d MMMM yyyy"
 
     guard let localizedFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale) else {
-      return self.apiToFullYearMonthDate(locale: locale)
+      return self
     }
 
     dateFormatterResult.dateFormat = localizedFormat
@@ -59,8 +79,9 @@ extension String {
     return dateFormatterResult.string(from: date)
   }
 
-  public func apiToFullYearMonthDate(locale: Locale = .current) -> String {
-    guard let date = self.apiStringDateToDate() else {
+  /// 2000-01 to January 2000
+  public func apiShortStringDateToYearMonthStringDate(locale: Locale = .current) -> String {
+    guard let date = self.apiShortStringDateToDate() else {
       return self
     }
 

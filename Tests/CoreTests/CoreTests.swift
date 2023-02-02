@@ -8,10 +8,16 @@ final class CoreTests: XCTestCase {
     XCTAssertEqual(try formatDate(stringDate: "2023-04", dateFormatComponents: [.monthFull, .yearFull]), "April 2023")
   }
 
+  func testFormatYearMonthStringDateToYearMonthDate() {
+    XCTAssertEqual("2023-01".apiShortStringDateToYearMonthStringDate(), "January 2023")
+    XCTAssertEqual("2023-04".apiShortStringDateToYearMonthStringDate(locale: Locale(identifier: "en_us")), "April 2023")
+    XCTAssertEqual("2023-04".apiShortStringDateToYearMonthStringDate(locale: Locale(identifier: "id")), "April 2023")
+  }
+
   func testFormatFullStringDateToFullDate() {
-    XCTAssertEqual("2023-01-01".apiToFullDate(), "1 January 2023")
-    XCTAssertEqual("2023-04-21".apiToFullDate(locale: Locale(identifier: "en_us")), "April 21, 2023")
-    XCTAssertEqual("2023-04-21".apiToFullDate(locale: Locale(identifier: "id")), "21 April 2023")
+    XCTAssertEqual("2023-01-01".apiFullStringDateToFullStringDate(), "1 January 2023")
+    XCTAssertEqual("2023-04-21".apiFullStringDateToFullStringDate(locale: Locale(identifier: "en_us")), "April 21, 2023")
+    XCTAssertEqual("2023-04-21".apiFullStringDateToFullStringDate(locale: Locale(identifier: "id")), "21 April 2023")
   }
 
   func formatDate(stringDate: String, dateFormatComponents: [Date.DateFormatComponents]) throws -> String {
