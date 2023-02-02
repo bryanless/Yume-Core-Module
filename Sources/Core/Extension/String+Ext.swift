@@ -16,11 +16,13 @@ extension String {
 
   // MARK: - Date
   public func apiStringDateToDate() -> Date? {
-    let dateFormatter = DateFormatter()
+    let yearMonthDateDateFormatter = DateFormatter()
+    let yearMonthDateFormatter = DateFormatter()
 
-    dateFormatter.dateFormat = "yyyy-MM-dd"
+    yearMonthDateDateFormatter.dateFormat = "yyyy-MM-dd"
+    yearMonthDateFormatter.dateFormat = "yyyy-MM"
 
-    return dateFormatter.date(from: self)
+    return yearMonthDateDateFormatter.date(from: self) ?? yearMonthDateFormatter.date(from: self)
   }
 
   // MARK: - Other
