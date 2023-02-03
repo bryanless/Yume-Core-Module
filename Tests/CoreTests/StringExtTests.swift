@@ -1,7 +1,14 @@
+//
+//  StringExtTests.swift
+//  
+//
+//  Created by Bryan on 04/02/23.
+//
+
 import XCTest
 @testable import Core
 
-final class CoreTests: XCTestCase {
+final class StringExtTests: XCTestCase {
 
   func testFormatStringDateToDate() {
     XCTAssertEqual(try formatDate(stringDate: "2023-01", dateFormatComponents: [.monthFull, .yearFull]), "January 2023")
@@ -27,6 +34,7 @@ final class CoreTests: XCTestCase {
 
     return date
   }
+
 }
 
 enum FormatDateError: Error {
