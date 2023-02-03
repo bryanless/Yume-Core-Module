@@ -21,4 +21,7 @@ public struct YumeColor {
   public static let onBackground = Color("ColorOnBackground")
   public static let outline = Color("ColorOutline")
   public static let outlineVariant = Color("ColorOutlineVariant")
+  public static let inversePrimary = Color("ColorInverseSurface")
+  public static let inverseSurface = Color("ColorInverseSurface")
+  public static let inverseOnSurface = Color("ColorInverseOnSurface")
 }
