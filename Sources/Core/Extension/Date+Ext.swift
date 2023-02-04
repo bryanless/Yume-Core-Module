@@ -82,4 +82,14 @@ extension Date {
 
     return dateFormatter.string(from: self)
   }
+
+  // MARK: Interval
+  /// Compare date interval between two date and a distance in seconds.
+  ///
+  /// If unspecified, the current date is used with distance of 24 hours.
+  public func isExpired(
+    by date: Date = Date(),
+    from distance: Double = 24 * 3600) -> Bool {
+      return abs(self.timeIntervalSinceNow) > distance
+    }
 }
